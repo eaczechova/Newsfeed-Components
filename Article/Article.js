@@ -85,11 +85,34 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },  
+    {
+    title: 'Professional Software Development in 2020',
+    date: 'Jan 21st, 2020',
+      firstParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dapibus ullamcorper tincidunt. Integer et malesuada metus, 
+      et rhoncus massa. Morbi ut magna at nisl bibendum fringilla. Maecenas vestibulum tortor ac tellus elementum, sit amet convallis ipsum iaculis. 
+      Nunc id imperdiet urna. Vivamus porta est nec dapibus tincidunt. Ut imperdiet ipsum nisi, ut convallis massa semper vel. Vestibulum pulvinar 
+      mauris in iaculis vehicula. Sed posuere luctus arcu at consequat. Nam vitae consequat tortor, auctor luctus quam. Nullam iaculis condimentum 
+      magna ut hendrerit. Vestibulum iaculis convallis egestas.`,
+
+      secondParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dapibus ullamcorper tincidunt. Integer et malesuada metus, 
+      et rhoncus massa. Morbi ut magna at nisl bibendum fringilla. Maecenas vestibulum tortor ac tellus elementum, sit amet convallis ipsum iaculis. 
+      Nunc id imperdiet urna. Vivamus porta est nec dapibus tincidunt. Ut imperdiet ipsum nisi, ut convallis massa semper vel. Vestibulum pulvinar 
+      mauris in iaculis vehicula. Sed posuere luctus arcu at consequat. Nam vitae consequat tortor, auctor luctus quam. Nullam iaculis condimentum 
+      magna ut hendrerit. Vestibulum iaculis convallis egestas. `,
+
+      thirdParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In dapibus ullamcorper tincidunt. Integer et malesuada metus, 
+      et rhoncus massa. Morbi ut magna at nisl bibendum fringilla. Maecenas vestibulum tortor ac tellus elementum, sit amet convallis ipsum iaculis. 
+      Nunc id imperdiet urna. Vivamus porta est nec dapibus tincidunt. Ut imperdiet ipsum nisi, ut convallis massa semper vel. Vestibulum pulvinar 
+      mauris in iaculis vehicula. Sed posuere luctus arcu at consequat. Nam vitae consequat tortor, auctor luctus quam. Nullam iaculis condimentum 
+      magna ut hendrerit. Vestibulum iaculis convallis egestas.`
   }
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
+
+
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -112,3 +135,47 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+const articlesParent = document.querySelector('.articles');
+articlesParent.classList.add('articles');
+
+
+const createComponent = (data) => {
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const firstParagraph = document.createElement('p');
+  const secondParagraph = document.createElement('p');
+  const thirdParagraph = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  article.appendChild(articleDate);
+  article.appendChild(articleTitle);
+  article.appendChild(firstParagraph);
+  article.appendChild(secondParagraph);
+  article.appendChild(thirdParagraph);
+  article.appendChild(expandButton);
+
+  articleTitle.textContent = data.title;
+  articleDate.textContent = data.date;
+  firstParagraph.textContent = data.firstParagraph;
+  secondParagraph.textContent = data.secondParagraph;
+  thirdParagraph.textContent = data.thirdParagraph;
+  expandButton.textContent = 'expand';
+
+  expandButton.addEventListener('click', (event) => {
+    event.target.parentNode.classList.toggle('article-open');
+
+  });
+
+  return article;
+
+}
+
+data.forEach(article => {
+  const newarticle = createComponent(article);
+  articlesParent.appendChild(newarticle);
+})
