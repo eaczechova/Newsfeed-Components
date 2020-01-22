@@ -152,6 +152,10 @@ const createComponent = (data) => {
   articleDate.classList.add('date');
   expandButton.classList.add('expandButton');
 
+  firstParagraph.classList.add('text');
+  secondParagraph.classList.add('text');
+  thirdParagraph.classList.add('text');
+
   article.appendChild(articleDate);
   article.appendChild(articleTitle);
   article.appendChild(firstParagraph);
@@ -164,18 +168,30 @@ const createComponent = (data) => {
   firstParagraph.textContent = data.firstParagraph;
   secondParagraph.textContent = data.secondParagraph;
   thirdParagraph.textContent = data.thirdParagraph;
-  expandButton.textContent = 'expand';
+  expandButton.textContent = 'Click to Open';
 
   expandButton.addEventListener('click', (event) => {
-    event.target.parentNode.classList.toggle('article-open');
+    //Strech
 
+    if (!event.target.parentNode.classList.contains('article-open')) {
+      $(event.target).parent().animate({
+        'height': '450px'
+      }, 1500);
+      event.target.parentNode.classList.add('article-open');
+      expandButton.textContent = "Click to Close";
+    } else {
+      $(event.target).parent().animate({
+        'height': '50px',
+      }, 1500);
+      event.target.parentNode.classList.remove('article-open');
+      expandButton.textContent = "Click to Open";
+    }
   });
 
   return article;
-
 }
 
 data.forEach(article => {
   const newarticle = createComponent(article);
   articlesParent.appendChild(newarticle);
-})
+});

@@ -53,7 +53,13 @@ const createMenu = (data) => {
   const menuButton = document.querySelector('.menu-button');
 
   menuButton.addEventListener('click', () => {
-    menu.classList.toggle('menu--open');
+    if (!menuButton.classList.contains('menu--open')) {
+      $(".menu").slideDown("slow");
+      menuButton.classList.add('menu--open');
+    } else {
+      $(".menu").slideUp("slow");
+      menuButton.classList.remove('menu--open');
+    }
   });
 
   return menu;
