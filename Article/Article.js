@@ -147,21 +147,26 @@ const createComponent = (data) => {
   const secondParagraph = document.createElement('p');
   const thirdParagraph = document.createElement('p');
   const expandButton = document.createElement('span');
+  const checkBox = document.createElement('input');
 
   article.classList.add('article');
   articleDate.classList.add('date');
   expandButton.classList.add('expandButton');
-
+  checkBox.classList.add('close');
+  checkBox.setAttribute('type', 'checkbox');
   firstParagraph.classList.add('text');
   secondParagraph.classList.add('text');
   thirdParagraph.classList.add('text');
 
+
   article.appendChild(articleDate);
+  article.appendChild(checkBox);
   article.appendChild(articleTitle);
   article.appendChild(firstParagraph);
   article.appendChild(secondParagraph);
   article.appendChild(thirdParagraph);
   article.appendChild(expandButton);
+  
 
   articleTitle.textContent = data.title;
   articleDate.textContent = data.date;
@@ -187,6 +192,16 @@ const createComponent = (data) => {
       expandButton.textContent = "Click to Open";
     }
   });
+
+    //Strech II
+
+  checkBox.addEventListener('change', () => {
+    if (checkBox.checked) {
+      console.log(checkBox.checked);
+      checkBox.parentNode.style.display = "none"
+    }
+  });
+  
 
   return article;
 }
